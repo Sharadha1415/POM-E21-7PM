@@ -40,6 +40,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
 from object_repository.homepage_locators import HomePageLocators
+from utilities.generic_utilities import WebDriverUtility
 
 home = HomePageLocators()
 
@@ -50,13 +51,15 @@ class HomePage:
         self.driver = driver  ## self.driver --> driver = webdriver.Chrome()
         self.wait = WebDriverWait(driver, 10)
         self.ac = ActionChains(driver)
+        self.util = WebDriverUtility(driver)
 
     def validate_homepage(self):
         self.wait.until(EC.visibility_of_element_located(home.logo))
         time.sleep(1)
 
     def click_on_login(self):
-        self.driver.find_element(*home.login_link).click()
+        # self.driver.find_element(*home.login_link).click()
+        self.util.click_on_ele(home.login_link)
         time.sleep(1)
 
     def validate_logout(self):
@@ -69,7 +72,8 @@ class HomePage:
         time.sleep(2)
 
     def click_on_desktop(self):
-        self.driver.find_element(*home.desktops).click()
+        # self.driver.find_element(*home.desktops).click()
+        self.util.click_on_ele(home.desktops)
         time.sleep(2)
 
 
